@@ -13,7 +13,8 @@ class UserModel(
     var rg: String,
     var email: String,
     var profilePhoto: String,
-    var userRoles: Set<RoleEntity>,
-    var addressEntities: Set<AddressEntity>,
-    var postsVoted: Set<PostEntity>
+    var password: String,
+    var userRoles: Set<RoleEntity>?,
+    var addresses: Set<AddressEntity>?,
+    var postsVoted: Set<PostEntity>?
 )
