@@ -7,3 +7,10 @@ spring:
 security:
   token:
     key: ${SECURITY_TOKEN_KEY}
+
+keycloak:
+  realm: ${KEYCLOAK_REALM}
+  auth-server-url: ${AUTH_SERVER_KEYCLOAK}
+  resource: ${KEYCLOAK_RESOURCE}
+  ssl-required: none
+  bearer-only: true
