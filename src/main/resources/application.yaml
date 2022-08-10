@@ -8,6 +8,10 @@ security:
   token:
     key: ${SECURITY_TOKEN_KEY}
 
+management:
+  server:
+    port: 8081
+
 keycloak:
   realm: ${KEYCLOAK_REALM}
   auth-server-url: ${AUTH_SERVER_KEYCLOAK}

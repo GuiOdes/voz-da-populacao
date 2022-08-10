@@ -1,22 +1,26 @@
 package com.voz.da.populacao.populacao.port.adapter.api.controllers
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import com.voz.da.populacao.populacao.core.application.config.JWTUtil
+import com.voz.da.populacao.populacao.core.domain.models.UserModel
+import com.voz.da.populacao.populacao.core.domain.services.UserService
+import com.voz.da.populacao.populacao.port.adapter.database.entities.UserEntity
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/user")
 class UserController(
-//    private val userService: UserService
+    private val jwtUtil: JWTUtil,
+    private val userService: UserService
 ) {
 
     @GetMapping("/hello")
-    fun helloWorld(): String {
-        return "Hello, world!"
+    fun helloWorld(@RequestHeader("Authorization") userToken: String): Any? {
+        return jwtUtil.getUserClaim()
     }
 
-//    @PostMapping
-//    fun save(userModel: UserModel): UserModel {
-//        return userService.save(userModel)
-//    }
+    @PostMapping("/save")
+    fun save(@RequestBody userModel: UserModel): UserModel {
+        return userService.save(userModel)
+    }
 }

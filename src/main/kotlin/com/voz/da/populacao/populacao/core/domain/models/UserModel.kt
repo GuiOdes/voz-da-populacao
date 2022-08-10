@@ -6,13 +6,13 @@ import com.voz.da.populacao.populacao.port.adapter.database.entities.RoleEntity
 import java.time.LocalDate
 
 class UserModel(
-    val id: Long?,
+    val id: Long? = null,
     var name: String,
     var birthDate: LocalDate,
     var cpf: String,
     var rg: String,
     var email: String,
-    var profilePhoto: String,
+    var profilePhoto: String? = null,
     var password: String,
     var userRoles: Set<RoleEntity>?,
     var addresses: Set<AddressEntity>?,

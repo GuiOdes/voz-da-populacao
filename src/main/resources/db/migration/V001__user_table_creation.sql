@@ -5,5 +5,5 @@ CREATE TABLE tb_user (
     cpf                     VARCHAR(15) NOT NULL UNIQUE,
     rg                      VARCHAR(15) NOT NULL UNIQUE,
     email                   VARCHAR(150) NOT NULL UNIQUE,
-    profile_photo_reference VARCHAR(255) NOT NULL UNIQUE
+    profile_photo_reference VARCHAR(255) UNIQUE
 );

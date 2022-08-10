@@ -3,6 +3,7 @@ package com.voz.da.populacao.populacao.core.application.config
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletRequest
 @KeycloakConfiguration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 class KeycloakAdapterConfig(
-    private val managementPort: Int = 8081
+    @Value("\${management.server.port}") private val managementPort: Int
 ): KeycloakWebSecurityConfigurerAdapter() {
 
     @Autowired
@@ -34,10 +35,9 @@ class KeycloakAdapterConfig(
 
     override fun configure(http: HttpSecurity) {
         super.configure(http)
-
         http.csrf().disable()
             .authorizeRequests()
-            .antMatchers("*/**")
+            .antMatchers("*")
             .authenticated().and().authorizeRequests()
             .requestMatchers(checkPort(managementPort)).permitAll()
     }
@@ -45,5 +45,4 @@ class KeycloakAdapterConfig(
     private fun checkPort(port: Int): RequestMatcher {
         return RequestMatcher { request: HttpServletRequest -> port == request.localPort }
     }
-
 }
