@@ -14,6 +14,6 @@ class UserRepositoryImpl(
     }
 
     override fun findByEmail(email: String): UserModel? {
-        return springDataRepository.findByEmail(email)
+        return springDataRepository.findByEmail(email)?.toUserModel()
     }
 }

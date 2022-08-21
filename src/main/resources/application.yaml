@@ -3,18 +3,3 @@ spring:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-
-security:
-  token:
-    key: ${SECURITY_TOKEN_KEY}
-
-management:
-  server:
-    port: 8081
-
-keycloak:
-  realm: ${KEYCLOAK_REALM}
-  auth-server-url: ${AUTH_SERVER_KEYCLOAK}
-  resource: ${KEYCLOAK_RESOURCE}
-  ssl-required: none
-  bearer-only: true

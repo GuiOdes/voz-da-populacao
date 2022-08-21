@@ -18,6 +18,6 @@ class RoleEntity (
     @Column(name = "name")
     var name: String,
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "userRoles")
     val users: Set<UserEntity>
 )

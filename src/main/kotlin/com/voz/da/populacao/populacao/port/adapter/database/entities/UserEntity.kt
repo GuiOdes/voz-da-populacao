@@ -2,15 +2,8 @@ package com.voz.da.populacao.populacao.port.adapter.database.entities
 
 import com.voz.da.populacao.populacao.core.domain.models.UserModel
 import java.time.LocalDate
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToMany
-import javax.persistence.OneToMany
-import javax.persistence.Table
+import java.util.UUID
+import javax.persistence.*
 import javax.validation.constraints.Email
 
 @Entity
@@ -18,7 +11,7 @@ import javax.validation.constraints.Email
 class UserEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    val id: Long?,
+    val id: UUID? = null,
 
     @Column(name = "name")
     var name: String,
@@ -37,19 +30,29 @@ class UserEntity (
     var email: String,
 
     @Column(name = "profile_photo_reference")
-    var profilePhoto: String?,
+    var profilePhoto: String? = null,
 
     @Column(name = "password")
     var password: String,
 
-    @ManyToMany
-    val userRoles: Set<RoleEntity>?,
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "tb_user_role",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "role_id")]
+    )
+    val userRoles: Set<RoleEntity>? = null,
 
     @OneToMany(mappedBy = "userOwner")
-    var addresses: Set<AddressEntity>?,
+    var addresses: Set<AddressEntity>? = null,
 
-    @ManyToMany(mappedBy = "usersVoted")
-    var postsVoted: Set<PostEntity>?
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "tb_post_likes",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "post_id")]
+    )
+    var postsVoted: Set<PostEntity>? = null
 ) {
 
     fun toUserModel(): UserModel {

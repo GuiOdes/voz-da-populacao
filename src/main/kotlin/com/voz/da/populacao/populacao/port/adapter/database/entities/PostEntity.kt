@@ -34,7 +34,6 @@ class PostEntity (
     @Column(name = "classification_type")
     var classification: PostClassification,
 
-    @JoinColumn
-    @ManyToMany
+    @ManyToMany(mappedBy = "postsVoted")
     var usersVoted: Set<UserEntity>
 )

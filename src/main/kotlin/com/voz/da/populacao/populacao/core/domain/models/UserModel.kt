@@ -4,9 +4,10 @@ import com.voz.da.populacao.populacao.port.adapter.database.entities.AddressEnti
 import com.voz.da.populacao.populacao.port.adapter.database.entities.PostEntity
 import com.voz.da.populacao.populacao.port.adapter.database.entities.RoleEntity
 import java.time.LocalDate
+import java.util.UUID
 
 class UserModel(
-    val id: Long? = null,
+    val id: UUID? = null,
     var name: String,
     var birthDate: LocalDate,
     var cpf: String,
@@ -14,7 +15,7 @@ class UserModel(
     var email: String,
     var profilePhoto: String? = null,
     var password: String,
-    var userRoles: Set<RoleEntity>?,
-    var addresses: Set<AddressEntity>?,
-    var postsVoted: Set<PostEntity>?
+    var userRoles: Set<RoleEntity>? = null,
+    var addresses: Set<AddressEntity>? = null,
+    var postsVoted: Set<PostEntity>? = null
 )
